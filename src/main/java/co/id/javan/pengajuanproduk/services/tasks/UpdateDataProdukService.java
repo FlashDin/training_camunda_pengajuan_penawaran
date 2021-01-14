@@ -24,7 +24,7 @@ public class UpdateDataProdukService implements JavaDelegate {
         produk.setHargaProduk((Double) delegateExecution.getVariable("hargaProduk"));
         produk.setKuantitasProduk((String) delegateExecution.getVariable("kuantitasProduk"));
         produk.setPenawaran((Penawaran) delegateExecution.getVariable("penawaran"));
-        produk.setInstanceId((String) delegateExecution.getVariable("instanceId"));
+        produk.setInstanceId(delegateExecution.getProcessInstanceId());
         produkRepository.save(produk);
     }
 }

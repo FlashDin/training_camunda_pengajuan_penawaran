@@ -20,7 +20,7 @@ public class UpdateDataDokumenService implements JavaDelegate {
         Dokumen dokumen = new Dokumen();
         dokumen.setPathDokumen((String) delegateExecution.getVariable("pathDokumen"));
         dokumen.setPenawaran((Penawaran) delegateExecution.getVariable("penawaran"));
-        dokumen.setInstanceId((String) delegateExecution.getVariable("instanceId"));
+        dokumen.setInstanceId(delegateExecution.getProcessInstanceId());
         dokumenRepository.save(dokumen);
     }
 }

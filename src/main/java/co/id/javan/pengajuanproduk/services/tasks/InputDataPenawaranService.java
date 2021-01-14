@@ -24,7 +24,7 @@ public class InputDataPenawaranService implements JavaDelegate {
         penawaran.setAlamatPenawaran((String) delegateExecution.getVariable("alamatPenawaran"));
         penawaran.setNoTelpPenawaran((String) delegateExecution.getVariable("noTelpPenawaran"));
         penawaran.setStatusPenawaran((String) delegateExecution.getVariable("statusPenawaran"));
-        penawaran.setInstanceId((String) delegateExecution.getVariable("instanceId"));
+        penawaran.setInstanceId(delegateExecution.getProcessInstanceId());
         penawaranRepository.save(penawaran);
     }
 }

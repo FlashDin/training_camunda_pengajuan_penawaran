@@ -22,7 +22,7 @@ public class UpdateDataDistributorService implements JavaDelegate {
         distributor.setNpwpDistributor((String) delegateExecution.getVariable("npwpDistributor"));
         distributor.setEmailDistributor((String) delegateExecution.getVariable("emailDistributor"));
         distributor.setPenawaran((Penawaran) delegateExecution.getVariable("penawaran"));
-        distributor.setInstanceId((String) delegateExecution.getVariable("instanceId"));
+        distributor.setInstanceId(delegateExecution.getProcessInstanceId());
         distributorRepository.save(distributor);
     }
 }
