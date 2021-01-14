@@ -3,6 +3,7 @@ package co.id.javan.pengajuanproduk.controllers;
 import co.id.javan.pengajuanproduk.pojo.Distributor;
 import co.id.javan.pengajuanproduk.pojo.Penawaran;
 import co.id.javan.pengajuanproduk.pojo.TaskVariable;
+import co.id.javan.pengajuanproduk.repositories.DistributorRepository;
 import co.id.javan.pengajuanproduk.services.CamundaProcessService;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.task.Task;
@@ -21,6 +22,8 @@ public class DistributorController {
     private CamundaProcessService camundaProcessService;
     @Inject
     private RuntimeService runtimeService;
+    @Autowired
+    private DistributorRepository distributorRepository;
 
     @GetMapping(path = "/active")
     public List<Distributor> getActiveTasks(@RequestParam("taskDefinitionKey") String taskDefinitionKey) {
@@ -59,6 +62,16 @@ public class DistributorController {
         distributor.setEmailDistributor(emailDistributor);
         distributor.setPenawaran(penawaran);
         return distributor;
+    }
+
+    @GetMapping(path = "/db/all")
+    public List<Distributor> findAll() {
+        return distributorRepository.findAll();
+    }
+
+    @GetMapping(path = "/bd/{id}")
+    public Distributor findById(@PathVariable long id) {
+        return distributorRepository.findById(id).get();
     }
 
 }

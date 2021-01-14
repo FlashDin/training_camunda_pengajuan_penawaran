@@ -1,7 +1,9 @@
 package co.id.javan.pengajuanproduk.controllers;
 
+import co.id.javan.pengajuanproduk.pojo.Distributor;
 import co.id.javan.pengajuanproduk.pojo.Penawaran;
 import co.id.javan.pengajuanproduk.pojo.TaskVariable;
+import co.id.javan.pengajuanproduk.repositories.PenawaranRepository;
 import co.id.javan.pengajuanproduk.services.CamundaProcessService;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.task.Task;
@@ -20,6 +22,8 @@ public class PenawaranController {
     private CamundaProcessService camundaProcessService;
     @Inject
     private RuntimeService runtimeService;
+    @Autowired
+    private PenawaranRepository penawaranRepository;
 
     @GetMapping(path = "/active")
     public List<Penawaran> getActiveTasks(@RequestParam("taskDefinitionKey") String taskDefinitionKey) {
@@ -70,6 +74,16 @@ public class PenawaranController {
         penawaran.setNoTelpPenawaran(noTelpPenawaran);
         penawaran.setStatusPenawaran(statusPenawaran);
         return penawaran;
+    }
+
+    @GetMapping(path = "/db/all")
+    public List<Penawaran> findAll() {
+        return penawaranRepository.findAll();
+    }
+
+    @GetMapping(path = "/bd/{id}")
+    public Penawaran findById(@PathVariable long id) {
+        return penawaranRepository.findById(id).get();
     }
 
 }

@@ -1,8 +1,10 @@
 package co.id.javan.pengajuanproduk.controllers;
 
+import co.id.javan.pengajuanproduk.pojo.Distributor;
 import co.id.javan.pengajuanproduk.pojo.Dokumen;
 import co.id.javan.pengajuanproduk.pojo.Penawaran;
 import co.id.javan.pengajuanproduk.pojo.TaskVariable;
+import co.id.javan.pengajuanproduk.repositories.DokumenRepository;
 import co.id.javan.pengajuanproduk.services.CamundaProcessService;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.task.Task;
@@ -21,6 +23,8 @@ public class DokumenController {
     private CamundaProcessService camundaProcessService;
     @Inject
     private RuntimeService runtimeService;
+    @Autowired
+    private DokumenRepository dokumenRepository;
 
     @GetMapping(path = "/active")
     public List<Dokumen> getActiveTasks(@RequestParam("taskDefinitionKey") String taskDefinitionKey) {
@@ -51,6 +55,16 @@ public class DokumenController {
         dokumen.setPathDokumen(pathDokumen);
         dokumen.setPenawaran(penawaran);
         return dokumen;
+    }
+
+    @GetMapping(path = "/db/all")
+    public List<Dokumen> findAll() {
+        return dokumenRepository.findAll();
+    }
+
+    @GetMapping(path = "/bd/{id}")
+    public Dokumen findById(@PathVariable long id) {
+        return dokumenRepository.findById(id).get();
     }
 
 }

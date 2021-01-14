@@ -1,8 +1,10 @@
 package co.id.javan.pengajuanproduk.controllers;
 
+import co.id.javan.pengajuanproduk.pojo.Distributor;
 import co.id.javan.pengajuanproduk.pojo.Produk;
 import co.id.javan.pengajuanproduk.pojo.Penawaran;
 import co.id.javan.pengajuanproduk.pojo.TaskVariable;
+import co.id.javan.pengajuanproduk.repositories.ProdukRepository;
 import co.id.javan.pengajuanproduk.services.CamundaProcessService;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.task.Task;
@@ -21,6 +23,8 @@ public class ProdukController {
     private CamundaProcessService camundaProcessService;
     @Inject
     private RuntimeService runtimeService;
+    @Autowired
+    private ProdukRepository produkRepository;
 
     @GetMapping(path = "/active")
     public List<Produk> getActiveTasks(@RequestParam("taskDefinitionKey") String taskDefinitionKey) {
@@ -67,6 +71,16 @@ public class ProdukController {
         produk.setKuantitasProduk(kuantitasProduk);
         produk.setPenawaran(penawaran);
         return produk;
+    }
+
+    @GetMapping(path = "/db/all")
+    public List<Produk> findAll() {
+        return produkRepository.findAll();
+    }
+
+    @GetMapping(path = "/bd/{id}")
+    public Produk findById(@PathVariable long id) {
+        return produkRepository.findById(id).get();
     }
 
 }
