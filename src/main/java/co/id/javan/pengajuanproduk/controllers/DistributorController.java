@@ -24,4 +24,9 @@ public class DistributorController {
         return distributorRepository.findById(id).get();
     }
 
+    @PostMapping(path = "/db")
+    public Distributor save(@RequestBody Distributor distributor) {
+        return distributorRepository.save(distributor);
+    }
+
 }

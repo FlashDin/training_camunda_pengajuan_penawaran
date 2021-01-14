@@ -17,14 +17,14 @@ public class UpdateDataProdukService implements JavaDelegate {
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
         System.out.println("Update Produk");
-        Produk produk = new Produk();
-        produk.setNamaProduk((String) delegateExecution.getVariable("namaProduk"));
-        produk.setMerkProduk((String) delegateExecution.getVariable("merkProduk"));
-        produk.setNoProduk((String) delegateExecution.getVariable("noProduk"));
-        produk.setHargaProduk((Double) delegateExecution.getVariable("hargaProduk"));
-        produk.setKuantitasProduk((String) delegateExecution.getVariable("kuantitasProduk"));
-        produk.setPenawaran((Penawaran) delegateExecution.getVariable("penawaran"));
-        produk.setInstanceId(delegateExecution.getProcessInstanceId());
-        produkRepository.save(produk);
+//        Produk produk = new Produk();
+//        produk.setNamaProduk((String) delegateExecution.getVariable("namaProduk"));
+//        produk.setMerkProduk((String) delegateExecution.getVariable("merkProduk"));
+//        produk.setNoProduk((String) delegateExecution.getVariable("noProduk"));
+//        produk.setHargaProduk((Double) delegateExecution.getVariable("hargaProduk"));
+//        produk.setKuantitasProduk((String) delegateExecution.getVariable("kuantitasProduk"));
+//        produk.setPenawaran((Penawaran) delegateExecution.getVariable("penawaran"));
+//        produk.setInstanceId(delegateExecution.getProcessInstanceId());
+//        produkRepository.save(produk);
     }
 }

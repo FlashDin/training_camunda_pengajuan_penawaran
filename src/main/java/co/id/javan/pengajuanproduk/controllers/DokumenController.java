@@ -24,4 +24,9 @@ public class DokumenController {
         return dokumenRepository.findById(id).get();
     }
 
+    @PostMapping(path = "/db")
+    public Dokumen save(@RequestBody Dokumen distributor) {
+        return dokumenRepository.save(distributor);
+    }
+
 }

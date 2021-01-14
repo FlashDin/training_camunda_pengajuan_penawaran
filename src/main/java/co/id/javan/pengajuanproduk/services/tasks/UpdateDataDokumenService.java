@@ -17,10 +17,10 @@ public class UpdateDataDokumenService implements JavaDelegate {
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
         System.out.println("Update Dokumen");
-        Dokumen dokumen = new Dokumen();
-        dokumen.setPathDokumen((String) delegateExecution.getVariable("pathDokumen"));
-        dokumen.setPenawaran((Penawaran) delegateExecution.getVariable("penawaran"));
-        dokumen.setInstanceId(delegateExecution.getProcessInstanceId());
-        dokumenRepository.save(dokumen);
+//        Dokumen dokumen = new Dokumen();
+//        dokumen.setPathDokumen((String) delegateExecution.getVariable("pathDokumen"));
+//        dokumen.setPenawaran((Penawaran) delegateExecution.getVariable("penawaran"));
+//        dokumen.setInstanceId(delegateExecution.getProcessInstanceId());
+//        dokumenRepository.save(dokumen);
     }
 }

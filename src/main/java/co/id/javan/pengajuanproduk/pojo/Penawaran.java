@@ -35,6 +35,8 @@ public class Penawaran extends TaskVariable {
     private String noTelpPenawaran;
     @Column(columnDefinition = "varchar(20)")
     private String statusPenawaran;
+    @Column(columnDefinition = "date")
+    private String tglPengajuan;
 
     @Column(columnDefinition = "varchar(50)")
     protected String instanceId;

@@ -17,12 +17,12 @@ public class UpdateDataDistributorService implements JavaDelegate {
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
         System.out.println("Update Distributor");
-        Distributor distributor = new Distributor();
-        distributor.setNamaDistributor((String) delegateExecution.getVariable("namaDistributor"));
-        distributor.setNpwpDistributor((String) delegateExecution.getVariable("npwpDistributor"));
-        distributor.setEmailDistributor((String) delegateExecution.getVariable("emailDistributor"));
-        distributor.setPenawaran((Penawaran) delegateExecution.getVariable("penawaran"));
-        distributor.setInstanceId(delegateExecution.getProcessInstanceId());
-        distributorRepository.save(distributor);
+//        Distributor distributor = new Distributor();
+//        distributor.setNamaDistributor((String) delegateExecution.getVariable("namaDistributor"));
+//        distributor.setNpwpDistributor((String) delegateExecution.getVariable("npwpDistributor"));
+//        distributor.setEmailDistributor((String) delegateExecution.getVariable("emailDistributor"));
+//        distributor.setPenawaran((Penawaran) delegateExecution.getVariable("penawaran"));
+//        distributor.setInstanceId(delegateExecution.getProcessInstanceId());
+//        distributorRepository.save(distributor);
     }
 }

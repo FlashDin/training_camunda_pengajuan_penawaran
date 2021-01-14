@@ -23,4 +23,9 @@ public class ProdukController {
         return produkRepository.findById(id).get();
     }
 
+    @PostMapping(path = "/db")
+    public Produk save(@RequestBody Produk distributor) {
+        return produkRepository.save(distributor);
+    }
+
 }
