@@ -85,7 +85,7 @@ public class PenawaranController {
         return penawaranRepository.findById(id).get();
     }
 
-    @GetMapping(path = "/db/{id}")
+    @GetMapping(path = "/db/status")
     public List<Penawaran> findAllByStatusPenawaran(@RequestParam String statusPenawaran) {
         return penawaranRepository.findAllByStatusPenawaran(statusPenawaran);
     }
