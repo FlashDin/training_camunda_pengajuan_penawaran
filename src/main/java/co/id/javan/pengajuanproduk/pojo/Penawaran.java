@@ -5,11 +5,11 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity
-@Table
+//@Entity
+//@Table
 @Getter
 @Setter
-public class Penawaran {
+public class Penawaran extends TaskVariable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +27,7 @@ public class Penawaran {
     private String alamatPenawaran;
     @Column(columnDefinition = "varchar(50)")
     private String noTelpPenawaran;
-    @Column(columnDefinition = "boolean")
-    private boolean statusPenawaran;
+    @Column(columnDefinition = "varchar(20)")
+    private String statusPenawaran;
 
 }

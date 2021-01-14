@@ -5,11 +5,11 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity
-@Table
+//@Entity
+//@Table
 @Getter
 @Setter
-public class Produk {
+public class Produk extends TaskVariable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,5 +25,8 @@ public class Produk {
     private double hargaProduk;
     @Column(columnDefinition = "varchar(50)")
     private String kuantitasProduk;
+    @ManyToOne(targetEntity = Penawaran.class)
+    @JoinColumn(name = "id_penawaran", referencedColumnName = "idPenawaran")
+    private Penawaran penawaran;
 
 }

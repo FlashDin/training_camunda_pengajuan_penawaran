@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table
 @Getter
 @Setter
-public class Dokumen {
+public class Dokumen extends TaskVariable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,5 +17,9 @@ public class Dokumen {
     private long idDokumen;
     @Column(columnDefinition = "varchar(50)")
     private String pathDokumen;
+    @ManyToOne(targetEntity = Penawaran.class)
+    @JoinColumn(name = "id_penawaran", referencedColumnName = "idPenawaran")
+    private Penawaran penawaran;
+
 
 }

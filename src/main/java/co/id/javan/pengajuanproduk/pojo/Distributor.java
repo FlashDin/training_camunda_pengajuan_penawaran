@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table
 @Getter
 @Setter
-public class Distributor {
+public class Distributor extends TaskVariable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,5 +21,8 @@ public class Distributor {
     private String npwpDistributor;
     @Column(columnDefinition = "varchar(50)")
     private String emailDistributor;
+    @ManyToOne(targetEntity = Penawaran.class)
+    @JoinColumn(name = "id_penawaran", referencedColumnName = "idPenawaran")
+    private Penawaran penawaran;
 
 }
