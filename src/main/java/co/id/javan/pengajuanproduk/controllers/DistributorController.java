@@ -19,7 +19,7 @@ public class DistributorController {
         return distributorRepository.findAll();
     }
 
-    @GetMapping(path = "/bd/{id}")
+    @GetMapping(path = "/db/{id}")
     public Distributor findById(@PathVariable long id) {
         return distributorRepository.findById(id).get();
     }

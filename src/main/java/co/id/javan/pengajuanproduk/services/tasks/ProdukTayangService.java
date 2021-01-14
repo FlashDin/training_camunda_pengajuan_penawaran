@@ -8,6 +8,6 @@ public class ProdukTayangService implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        System.out.println("Produk Tayang");
+        System.out.println("Produk Tayang di Katalog");
     }
 }

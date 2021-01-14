@@ -19,7 +19,7 @@ public class DokumenController {
         return dokumenRepository.findAll();
     }
 
-    @GetMapping(path = "/bd/{id}")
+    @GetMapping(path = "/db/{id}")
     public Dokumen findById(@PathVariable long id) {
         return dokumenRepository.findById(id).get();
     }

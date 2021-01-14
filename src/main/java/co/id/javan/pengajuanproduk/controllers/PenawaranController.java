@@ -80,9 +80,14 @@ public class PenawaranController {
         return penawaranRepository.findAll();
     }
 
-    @GetMapping(path = "/bd/{id}")
+    @GetMapping(path = "/db/{id}")
     public Penawaran findById(@PathVariable long id) {
         return penawaranRepository.findById(id).get();
+    }
+
+    @GetMapping(path = "/db/{id}")
+    public List<Penawaran> findAllByStatusPenawaran(@RequestParam String statusPenawaran) {
+        return penawaranRepository.findAllByStatusPenawaran(statusPenawaran);
     }
 
 }

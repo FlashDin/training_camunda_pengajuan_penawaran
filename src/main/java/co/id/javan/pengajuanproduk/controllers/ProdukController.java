@@ -18,7 +18,7 @@ public class ProdukController {
         return produkRepository.findAll();
     }
 
-    @GetMapping(path = "/bd/{id}")
+    @GetMapping(path = "/db/{id}")
     public Produk findById(@PathVariable long id) {
         return produkRepository.findById(id).get();
     }
