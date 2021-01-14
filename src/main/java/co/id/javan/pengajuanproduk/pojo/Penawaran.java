@@ -1,14 +1,20 @@
 package co.id.javan.pengajuanproduk.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
 @Getter
 @Setter
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "idPenawaran")
 public class Penawaran extends TaskVariable {
 
     @Id
@@ -32,5 +38,12 @@ public class Penawaran extends TaskVariable {
 
     @Column(columnDefinition = "varchar(50)")
     protected String instanceId;
+
+    @OneToMany(mappedBy = "penawaran", fetch = FetchType.LAZY)
+    private List<Distributor> penawarans;
+    @OneToMany(mappedBy = "penawaran", fetch = FetchType.LAZY)
+    private List<Dokumen> dokumens;
+    @OneToMany(mappedBy = "penawaran", fetch = FetchType.LAZY)
+    private List<Produk> produks;
 
 }

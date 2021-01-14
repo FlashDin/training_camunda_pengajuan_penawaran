@@ -5,7 +5,9 @@ import co.id.javan.pengajuanproduk.repositories.PenawaranRepository;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class InputDataPenawaranService implements JavaDelegate {
 
     @Autowired
@@ -21,7 +23,7 @@ public class InputDataPenawaranService implements JavaDelegate {
         penawaran.setEmailPenawaran((String) delegateExecution.getVariable("emailPenawaran"));
         penawaran.setAlamatPenawaran((String) delegateExecution.getVariable("alamatPenawaran"));
         penawaran.setNoTelpPenawaran((String) delegateExecution.getVariable("noTelpPenawaran"));
-        penawaran.setStatusPenawaran("Persiapan");
+        penawaran.setStatusPenawaran((String) delegateExecution.getVariable("statusPenawaran"));
         penawaran.setInstanceId((String) delegateExecution.getVariable("instanceId"));
         penawaranRepository.save(penawaran);
     }
