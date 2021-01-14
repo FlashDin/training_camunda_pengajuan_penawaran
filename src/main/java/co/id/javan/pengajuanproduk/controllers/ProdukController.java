@@ -5,7 +5,9 @@ import co.id.javan.pengajuanproduk.repositories.ProdukRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/task/produk")
@@ -13,6 +15,7 @@ public class ProdukController {
 
     @Autowired
     private ProdukRepository produkRepository;
+
     @GetMapping(path = "/db/all")
     public List<Produk> findAll() {
         return produkRepository.findAll();
@@ -24,8 +27,15 @@ public class ProdukController {
     }
 
     @PostMapping(path = "/db")
-    public Produk save(@RequestBody Produk distributor) {
-        return produkRepository.save(distributor);
+    public Map<String, Object> save(@RequestBody Produk distributor) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("msg", "Data berhasil disimpan");
+        try {
+            produkRepository.save(distributor);
+        } catch (Exception e) {
+            map.put("msg", "Data gagal disimpan");
+        }
+        return map;
     }
 
 }
