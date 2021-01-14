@@ -5,8 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-//@Entity
-//@Table
+@Entity
+@Table
 @Getter
 @Setter
 public class Produk extends TaskVariable {
@@ -28,5 +28,8 @@ public class Produk extends TaskVariable {
     @ManyToOne(targetEntity = Penawaran.class)
     @JoinColumn(name = "id_penawaran", referencedColumnName = "idPenawaran")
     private Penawaran penawaran;
+
+    @Column(columnDefinition = "varchar(50)")
+    protected String instanceId;
 
 }

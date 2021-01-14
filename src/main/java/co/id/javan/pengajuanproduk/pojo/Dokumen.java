@@ -21,5 +21,7 @@ public class Dokumen extends TaskVariable {
     @JoinColumn(name = "id_penawaran", referencedColumnName = "idPenawaran")
     private Penawaran penawaran;
 
+    @Column(columnDefinition = "varchar(50)")
+    protected String instanceId;
 
 }

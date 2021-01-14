@@ -5,8 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-//@Entity
-//@Table
+@Entity
+@Table
 @Getter
 @Setter
 public class Penawaran extends TaskVariable {
@@ -29,5 +29,8 @@ public class Penawaran extends TaskVariable {
     private String noTelpPenawaran;
     @Column(columnDefinition = "varchar(20)")
     private String statusPenawaran;
+
+    @Column(columnDefinition = "varchar(50)")
+    protected String instanceId;
 
 }
