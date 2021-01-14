@@ -1,6 +1,5 @@
 package co.id.javan.pengajuanproduk.controllers;
 
-import co.id.javan.pengajuanproduk.pojo.Distributor;
 import co.id.javan.pengajuanproduk.pojo.Penawaran;
 import co.id.javan.pengajuanproduk.pojo.TaskVariable;
 import co.id.javan.pengajuanproduk.repositories.PenawaranRepository;
