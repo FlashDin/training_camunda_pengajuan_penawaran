@@ -1,0 +1,23 @@
+#spring.datasource.url: jdbc:h2:file:./camunda-h2-database
+
+camunda.bpm.admin-user:
+  id: admin
+  password: demo
+server:
+  port: 8090
+
+spring:
+  datasource:
+    username: root
+    password:
+    url: jdbc:mysql://localhost:3306/pengajuan_produk?serverTimezone=UTC&useLegacyDatetimeCode=false
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+#camunda:
+#  bpm:
+#    database:
+#      type: mysql
+#    jpa:
+#      enabled: true

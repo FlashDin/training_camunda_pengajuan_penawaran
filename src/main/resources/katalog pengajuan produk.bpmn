@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0g6j72q" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.4.0">
+  <bpmn:collaboration id="Collaboration_0hat8cs">
+    <bpmn:participant id="Participant_1xgl3rt" name="Pengajuan penawaran" processRef="prc_pengajuan_penawaran" />
+  </bpmn:collaboration>
+  <bpmn:process id="prc_pengajuan_penawaran" isExecutable="true">
+    <bpmn:laneSet id="LaneSet_0gfzulf">
+      <bpmn:lane id="Lane_01jvtt3" name="Penyedia">
+        <bpmn:flowNodeRef>Gateway_1ob5fv2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>act_input_distributor</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>act_upload_file_adm</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>act_input_produk</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>evt_input_penawaran</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>act_kririm_db_penawaran</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>act_review_penawaran</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>act_upload_db_distributor</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>act_upload_file_db_adm</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>act_update_db_penawaran</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>act_kirim_penawaran</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_081x1t2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>act_update_db_produk</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_0m7m1tb" name="Pokja">
+        <bpmn:flowNodeRef>Gateway_1tt19hp</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>act_update_db_penawaran_diterima</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>act_produk_tayang</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_1nm58s3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>act_review_penawara</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_0c4e71z</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>act_update_db_penawaran_ditolak</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:parallelGateway id="Gateway_1ob5fv2">
+      <bpmn:incoming>Flow_0ad9kiq</bpmn:incoming>
+      <bpmn:outgoing>flw_input_produk</bpmn:outgoing>
+      <bpmn:outgoing>flw_upload_file_adm</bpmn:outgoing>
+      <bpmn:outgoing>flw_input_distributor</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:exclusiveGateway id="Gateway_1tt19hp" name="Apakah penawaran diterima ?" default="Flow_1iulqs6">
+      <bpmn:incoming>Flow_0flefgw</bpmn:incoming>
+      <bpmn:outgoing>Flow_1iulqs6</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1xtgqpd</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="act_update_db_penawaran_diterima" name="Update status Diterima" camunda:class="co.id.javan.pengajuanproduk.services.tasks.PenawaranDiterimaService">
+      <bpmn:incoming>Flow_1xtgqpd</bpmn:incoming>
+      <bpmn:outgoing>Flow_0z6oefs</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="act_produk_tayang" name="Produk tayang di katalog" camunda:class="co.id.javan.pengajuanproduk.services.tasks.ProdukTayangService">
+      <bpmn:incoming>Flow_0z6oefs</bpmn:incoming>
+      <bpmn:outgoing>Flow_0nb475u</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_1nm58s3" name="Penawran Diterima">
+      <bpmn:incoming>Flow_0nb475u</bpmn:incoming>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0bek89k" />
+    </bpmn:endEvent>
+    <bpmn:userTask id="act_input_distributor" name="Menginputkan distributor">
+      <bpmn:incoming>flw_input_distributor</bpmn:incoming>
+      <bpmn:outgoing>Flow_15j5e9c</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="act_upload_file_adm" name="Mengupload  file administrasi">
+      <bpmn:incoming>flw_upload_file_adm</bpmn:incoming>
+      <bpmn:outgoing>Flow_18nivbh</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="act_input_produk" name="Menginputkan produk">
+      <bpmn:incoming>flw_input_produk</bpmn:incoming>
+      <bpmn:outgoing>Flow_0tshakr</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="act_review_penawara" name="Mereview penawaran">
+      <bpmn:incoming>Flow_0ihp71n</bpmn:incoming>
+      <bpmn:outgoing>Flow_0flefgw</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="Event_0c4e71z" name="Penawaran Ditolak">
+      <bpmn:incoming>Flow_0l9hs2j</bpmn:incoming>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_14gaqyq" />
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="act_update_db_penawaran_ditolak" name="Update status Ditolak" camunda:class="co.id.javan.pengajuanproduk.services.tasks.PenawaranDitolakService">
+      <bpmn:incoming>Flow_1iulqs6</bpmn:incoming>
+      <bpmn:outgoing>Flow_0l9hs2j</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:startEvent id="evt_input_penawaran" name="Menginputkan form penawaran">
+      <bpmn:outgoing>Flow_1v8penq</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="act_kririm_db_penawaran" name="Mengirim data ke database" camunda:class="co.id.javan.pengajuanproduk.services.tasks.InputDataPenawaranService">
+      <bpmn:incoming>Flow_1v8penq</bpmn:incoming>
+      <bpmn:outgoing>Flow_0c7oxww</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="act_review_penawaran" name="Mereview Penawaran">
+      <bpmn:incoming>Flow_0c7oxww</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ad9kiq</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0ad9kiq" sourceRef="act_review_penawaran" targetRef="Gateway_1ob5fv2" />
+    <bpmn:sequenceFlow id="flw_input_produk" sourceRef="Gateway_1ob5fv2" targetRef="act_input_produk" />
+    <bpmn:sequenceFlow id="flw_upload_file_adm" sourceRef="Gateway_1ob5fv2" targetRef="act_upload_file_adm" />
+    <bpmn:sequenceFlow id="flw_input_distributor" sourceRef="Gateway_1ob5fv2" targetRef="act_input_distributor" />
+    <bpmn:sequenceFlow id="Flow_12dt9ji" sourceRef="Gateway_081x1t2" targetRef="act_kirim_penawaran" />
+    <bpmn:sequenceFlow id="Flow_1f88exp" sourceRef="act_kirim_penawaran" targetRef="act_update_db_penawaran" />
+    <bpmn:sequenceFlow id="Flow_0ihp71n" sourceRef="act_update_db_penawaran" targetRef="act_review_penawara" />
+    <bpmn:sequenceFlow id="Flow_0flefgw" sourceRef="act_review_penawara" targetRef="Gateway_1tt19hp" />
+    <bpmn:sequenceFlow id="Flow_1xtgqpd" name="ya" sourceRef="Gateway_1tt19hp" targetRef="act_update_db_penawaran_diterima">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isStatusPenawaran == true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1iulqs6" name="tidak" sourceRef="Gateway_1tt19hp" targetRef="act_update_db_penawaran_ditolak" />
+    <bpmn:sequenceFlow id="Flow_0z6oefs" sourceRef="act_update_db_penawaran_diterima" targetRef="act_produk_tayang" />
+    <bpmn:sequenceFlow id="Flow_0nb475u" sourceRef="act_produk_tayang" targetRef="Event_1nm58s3" />
+    <bpmn:sequenceFlow id="Flow_0l9hs2j" sourceRef="act_update_db_penawaran_ditolak" targetRef="Event_0c4e71z" />
+    <bpmn:sequenceFlow id="Flow_1v8penq" sourceRef="evt_input_penawaran" targetRef="act_kririm_db_penawaran" />
+    <bpmn:sequenceFlow id="Flow_0c7oxww" sourceRef="act_kririm_db_penawaran" targetRef="act_review_penawaran" />
+    <bpmn:sequenceFlow id="Flow_15j5e9c" sourceRef="act_input_distributor" targetRef="act_upload_db_distributor" />
+    <bpmn:serviceTask id="act_upload_db_distributor" name="update ke database" camunda:class="co.id.javan.pengajuanproduk.services.tasks.UpdateDataDistributorService">
+      <bpmn:incoming>Flow_15j5e9c</bpmn:incoming>
+      <bpmn:outgoing>Flow_14cbryy</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_18nivbh" sourceRef="act_upload_file_adm" targetRef="act_upload_file_db_adm" />
+    <bpmn:serviceTask id="act_upload_file_db_adm" name="update ke database" camunda:class="co.id.javan.pengajuanproduk.services.tasks.UpdateDataDokumenService">
+      <bpmn:incoming>Flow_18nivbh</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ena11h</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="act_update_db_penawaran" name="update ke database" camunda:class="co.id.javan.pengajuanproduk.services.tasks.KirimPenawaranService">
+      <bpmn:incoming>Flow_1f88exp</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ihp71n</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="act_kirim_penawaran" name="Kirim penawaran">
+      <bpmn:incoming>Flow_12dt9ji</bpmn:incoming>
+      <bpmn:outgoing>Flow_1f88exp</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:parallelGateway id="Gateway_081x1t2">
+      <bpmn:incoming>Flow_1nxsmcd</bpmn:incoming>
+      <bpmn:incoming>Flow_1ena11h</bpmn:incoming>
+      <bpmn:incoming>Flow_14cbryy</bpmn:incoming>
+      <bpmn:outgoing>Flow_12dt9ji</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:sequenceFlow id="Flow_0tshakr" sourceRef="act_input_produk" targetRef="act_update_db_produk" />
+    <bpmn:serviceTask id="act_update_db_produk" name="update ke database" camunda:class="co.id.javan.pengajuanproduk.services.tasks.UpdateDataProdukService">
+      <bpmn:incoming>Flow_0tshakr</bpmn:incoming>
+      <bpmn:outgoing>Flow_1nxsmcd</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1nxsmcd" sourceRef="act_update_db_produk" targetRef="Gateway_081x1t2" />
+    <bpmn:sequenceFlow id="Flow_1ena11h" sourceRef="act_upload_file_db_adm" targetRef="Gateway_081x1t2" />
+    <bpmn:sequenceFlow id="Flow_14cbryy" sourceRef="act_upload_db_distributor" targetRef="Gateway_081x1t2" />
+    <bpmn:textAnnotation id="TextAnnotation_1titls4">
+      <bpmn:text>status : Persiapan</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="TextAnnotation_0k3rlf1">
+      <bpmn:text>status : Menunggu Persetujuan</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="TextAnnotation_0uk53n2">
+      <bpmn:text>status : Penawaran Diterima</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="TextAnnotation_1f9nkbs">
+      <bpmn:text>status : Penawaran Ditolak</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0pud1e8" sourceRef="act_review_penawaran" targetRef="TextAnnotation_1titls4" />
+    <bpmn:association id="Association_09f6t5i" sourceRef="act_update_db_penawaran_diterima" targetRef="TextAnnotation_0uk53n2" />
+    <bpmn:association id="Association_11d61vc" sourceRef="act_update_db_penawaran_ditolak" targetRef="TextAnnotation_1f9nkbs" />
+    <bpmn:association id="Association_16rys4c" sourceRef="act_kirim_penawaran" targetRef="TextAnnotation_0k3rlf1" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0hat8cs">
+      <bpmndi:BPMNShape id="Participant_1xgl3rt_di" bpmnElement="Participant_1xgl3rt" isHorizontal="true">
+        <dc:Bounds x="145" y="69" width="1595" height="859" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0m7m1tb_di" bpmnElement="Lane_0m7m1tb" isHorizontal="true">
+        <dc:Bounds x="175" y="512" width="1565" height="416" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_01jvtt3_di" bpmnElement="Lane_01jvtt3" isHorizontal="true">
+        <dc:Bounds x="175" y="69" width="1565" height="443" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_14cbryy_di" bpmnElement="Flow_14cbryy">
+        <di:waypoint x="930" y="229" />
+        <di:waypoint x="980" y="229" />
+        <di:waypoint x="980" y="314" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ena11h_di" bpmnElement="Flow_1ena11h">
+        <di:waypoint x="930" y="339" />
+        <di:waypoint x="955" y="339" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1nxsmcd_di" bpmnElement="Flow_1nxsmcd">
+        <di:waypoint x="930" y="449" />
+        <di:waypoint x="980" y="449" />
+        <di:waypoint x="980" y="364" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0tshakr_di" bpmnElement="Flow_0tshakr">
+        <di:waypoint x="785" y="449" />
+        <di:waypoint x="830" y="449" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_18nivbh_di" bpmnElement="Flow_18nivbh">
+        <di:waypoint x="785" y="339" />
+        <di:waypoint x="830" y="339" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_15j5e9c_di" bpmnElement="Flow_15j5e9c">
+        <di:waypoint x="785" y="229" />
+        <di:waypoint x="830" y="229" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0c7oxww_di" bpmnElement="Flow_0c7oxww">
+        <di:waypoint x="425" y="229" />
+        <di:waypoint x="455" y="229" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1v8penq_di" bpmnElement="Flow_1v8penq">
+        <di:waypoint x="293" y="229" />
+        <di:waypoint x="325" y="229" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0l9hs2j_di" bpmnElement="Flow_0l9hs2j">
+        <di:waypoint x="1415" y="739" />
+        <di:waypoint x="1477" y="739" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0nb475u_di" bpmnElement="Flow_0nb475u">
+        <di:waypoint x="1575" y="579" />
+        <di:waypoint x="1637" y="579" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0z6oefs_di" bpmnElement="Flow_0z6oefs">
+        <di:waypoint x="1415" y="579" />
+        <di:waypoint x="1475" y="579" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1iulqs6_di" bpmnElement="Flow_1iulqs6">
+        <di:waypoint x="1235" y="704" />
+        <di:waypoint x="1235" y="739" />
+        <di:waypoint x="1315" y="739" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1239" y="719" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1xtgqpd_di" bpmnElement="Flow_1xtgqpd">
+        <di:waypoint x="1235" y="654" />
+        <di:waypoint x="1235" y="579" />
+        <di:waypoint x="1315" y="579" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1245" y="614" width="11" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0flefgw_di" bpmnElement="Flow_0flefgw">
+        <di:waypoint x="1155" y="679" />
+        <di:waypoint x="1210" y="679" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ihp71n_di" bpmnElement="Flow_0ihp71n">
+        <di:waypoint x="1250" y="379" />
+        <di:waypoint x="1250" y="509" />
+        <di:waypoint x="1105" y="509" />
+        <di:waypoint x="1105" y="639" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1f88exp_di" bpmnElement="Flow_1f88exp">
+        <di:waypoint x="1180" y="339" />
+        <di:waypoint x="1200" y="339" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12dt9ji_di" bpmnElement="Flow_12dt9ji">
+        <di:waypoint x="1005" y="339" />
+        <di:waypoint x="1080" y="339" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_137vaa2_di" bpmnElement="flw_input_distributor">
+        <di:waypoint x="640" y="229" />
+        <di:waypoint x="685" y="229" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0x5o8vo_di" bpmnElement="flw_upload_file_adm">
+        <di:waypoint x="615" y="254" />
+        <di:waypoint x="615" y="339" />
+        <di:waypoint x="685" y="339" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0f2mdp0_di" bpmnElement="flw_input_produk">
+        <di:waypoint x="615" y="254" />
+        <di:waypoint x="615" y="449" />
+        <di:waypoint x="685" y="449" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ad9kiq_di" bpmnElement="Flow_0ad9kiq">
+        <di:waypoint x="555" y="229" />
+        <di:waypoint x="590" y="229" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Gateway_1ob5fv2_di" bpmnElement="Gateway_1ob5fv2">
+        <dc:Bounds x="590" y="204" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1tt19hp_di" bpmnElement="Gateway_1tt19hp" isMarkerVisible="true">
+        <dc:Bounds x="1210" y="654" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1167" y="599" width="55" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1x15fdf_di" bpmnElement="act_update_db_penawaran_diterima">
+        <dc:Bounds x="1315" y="539" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_12n6fjj_di" bpmnElement="act_produk_tayang">
+        <dc:Bounds x="1475" y="539" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1omn4bl_di" bpmnElement="Event_1nm58s3">
+        <dc:Bounds x="1637" y="561" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1631" y="604" width="50" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1l5oniu_di" bpmnElement="act_input_distributor">
+        <dc:Bounds x="685" y="189" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_157ezic_di" bpmnElement="act_upload_file_adm">
+        <dc:Bounds x="685" y="299" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0qo6oif_di" bpmnElement="act_input_produk">
+        <dc:Bounds x="685" y="409" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1edj71c_di" bpmnElement="act_review_penawara">
+        <dc:Bounds x="1055" y="639" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ynt72r_di" bpmnElement="Event_0c4e71z">
+        <dc:Bounds x="1477" y="721" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1467" y="764" width="56" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ty79xr_di" bpmnElement="act_update_db_penawaran_ditolak">
+        <dc:Bounds x="1315" y="699" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_04lnxi9_di" bpmnElement="evt_input_penawaran">
+        <dc:Bounds x="257" y="211" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="236" y="254" width="80" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0l095rf_di" bpmnElement="act_kririm_db_penawaran">
+        <dc:Bounds x="325" y="189" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_157aq1o_di" bpmnElement="act_review_penawaran">
+        <dc:Bounds x="455" y="189" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1j0foob_di" bpmnElement="act_upload_db_distributor">
+        <dc:Bounds x="830" y="189" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1s0f6sg_di" bpmnElement="act_upload_file_db_adm">
+        <dc:Bounds x="830" y="299" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_14uizz6_di" bpmnElement="act_update_db_penawaran">
+        <dc:Bounds x="1200" y="299" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_056q35j_di" bpmnElement="act_kirim_penawaran">
+        <dc:Bounds x="1080" y="299" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_081x1t2_di" bpmnElement="Gateway_081x1t2">
+        <dc:Bounds x="955" y="314" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0exknp2_di" bpmnElement="act_update_db_produk">
+        <dc:Bounds x="830" y="409" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1titls4_di" bpmnElement="TextAnnotation_1titls4">
+        <dc:Bounds x="555" y="109" width="100" height="39" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0k3rlf1_di" bpmnElement="TextAnnotation_0k3rlf1">
+        <dc:Bounds x="1015" y="219" width="140" height="53" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0uk53n2_di" bpmnElement="TextAnnotation_0uk53n2">
+        <dc:Bounds x="1385" y="459" width="160" height="53" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1f9nkbs_di" bpmnElement="TextAnnotation_1f9nkbs">
+        <dc:Bounds x="1325" y="819" width="150" height="39" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0pud1e8_di" bpmnElement="Association_0pud1e8">
+        <di:waypoint x="543" y="189" />
+        <di:waypoint x="582" y="148" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_09f6t5i_di" bpmnElement="Association_09f6t5i">
+        <di:waypoint x="1392" y="539" />
+        <di:waypoint x="1410" y="512" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_11d61vc_di" bpmnElement="Association_11d61vc">
+        <di:waypoint x="1350" y="779" />
+        <di:waypoint x="1335" y="819" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_16rys4c_di" bpmnElement="Association_16rys4c">
+        <di:waypoint x="1098" y="299" />
+        <di:waypoint x="1075" y="272" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
