@@ -13,9 +13,9 @@ public class CamundaProcessService {
     @Inject
     private TaskService taskService;
 
-    public List<Task> getTasks(String processDefinitionKey) {
+    public List<Task> getTasks(String processInstanceId) {
         return taskService.createTaskQuery()
-                .processDefinitionKey(processDefinitionKey)
+                .processInstanceId(processInstanceId)
                 .list();
     }
 

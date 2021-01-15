@@ -12,9 +12,6 @@ import java.util.List;
 @Table
 @Getter
 @Setter
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "idPenawaran")
 public class Penawaran extends TaskVariable {
 
     @Id
@@ -42,7 +39,7 @@ public class Penawaran extends TaskVariable {
     protected String instanceId;
 
     @OneToMany(mappedBy = "penawaran", fetch = FetchType.LAZY)
-    private List<Distributor> penawarans;
+    private List<Distributor> distributors;
     @OneToMany(mappedBy = "penawaran", fetch = FetchType.LAZY)
     private List<Dokumen> dokumens;
     @OneToMany(mappedBy = "penawaran", fetch = FetchType.LAZY)

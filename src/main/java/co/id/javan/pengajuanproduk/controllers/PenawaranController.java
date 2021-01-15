@@ -24,9 +24,9 @@ public class PenawaranController {
     @Autowired
     private PenawaranRepository penawaranRepository;
 
-    @GetMapping(path = "/active")
-    public List<Penawaran> getActiveTasks(@RequestParam("taskDefinitionKey") String taskDefinitionKey) {
-        List<Task> tasks = camundaProcessService.getActiveTasks(TaskVariable.processDefinitionKey, taskDefinitionKey);
+    @GetMapping(path = "/all/{processInstanceId}")
+    public List<Penawaran> getTasks(@PathVariable("processInstanceId") String processInstanceId) {
+        List<Task> tasks = camundaProcessService.getTasks(processInstanceId);
         List<Penawaran> result = new ArrayList<>();
         for (Task task : tasks) {
             Penawaran penawaran = new Penawaran();
@@ -86,7 +86,7 @@ public class PenawaranController {
     }
 
     @GetMapping(path = "/db/status")
-    public List<Penawaran> findAllByStatusPenawaran(@RequestParam String statusPenawaran) {
+    public List<Penawaran> findAllByStatusPenawaran(@RequestParam("statusPenawaran") String statusPenawaran) {
         return penawaranRepository.findAllByStatusPenawaran(statusPenawaran);
     }
 

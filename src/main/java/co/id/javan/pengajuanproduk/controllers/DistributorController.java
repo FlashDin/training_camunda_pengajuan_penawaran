@@ -26,16 +26,16 @@ public class DistributorController {
         return distributorRepository.findById(id).get();
     }
 
-    @PostMapping(path = "/db")
-    public Map<String, Object> save(@RequestBody Distributor distributor) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("msg", "Data berhasil disimpan");
-        try {
-            distributorRepository.save(distributor);
-        } catch (Exception e) {
-            map.put("msg", "Data gagal disimpan");
-        }
-        return map;
-    }
+//    @PostMapping(path = "/db")
+//    public Map<String, Object> save(@RequestBody Distributor distributor) {
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("msg", "Data berhasil disimpan");
+//        try {
+//            distributorRepository.save(distributor);
+//        } catch (Exception e) {
+//            map.put("msg", "Data gagal disimpan");
+//        }
+//        return map;
+//    }
 
 }

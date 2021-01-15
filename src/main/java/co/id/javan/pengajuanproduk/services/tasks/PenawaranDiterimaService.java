@@ -2,6 +2,7 @@ package co.id.javan.pengajuanproduk.services.tasks;
 
 import co.id.javan.pengajuanproduk.pojo.Penawaran;
 import co.id.javan.pengajuanproduk.repositories.PenawaranRepository;
+import co.id.javan.pengajuanproduk.utils.MailSender;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ public class PenawaranDiterimaService implements JavaDelegate {
 
     @Autowired
     private PenawaranRepository penawaranRepository;
+    @Autowired
+    private MailSender mailSender;
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
@@ -23,6 +26,7 @@ public class PenawaranDiterimaService implements JavaDelegate {
             Penawaran penawaran = optionalPenawaran.get();
             penawaran.setStatusPenawaran("Penawaran Diterima");
             penawaranRepository.save(penawaran);
+            mailSender.sendmail((String) delegateExecution.getVariable("emailPenawaran"), "Penawaran diterima", "Selamat", "Penawaran anda diterima");
         }
     }
 }

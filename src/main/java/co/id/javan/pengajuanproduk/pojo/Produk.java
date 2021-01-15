@@ -1,5 +1,6 @@
 package co.id.javan.pengajuanproduk.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,6 +26,7 @@ public class Produk extends TaskVariable {
     private double hargaProduk;
     @Column(columnDefinition = "varchar(50)")
     private String kuantitasProduk;
+    @JsonIgnore
     @ManyToOne(targetEntity = Penawaran.class)
     @JoinColumn(name = "id_penawaran", referencedColumnName = "idPenawaran")
     private Penawaran penawaran;

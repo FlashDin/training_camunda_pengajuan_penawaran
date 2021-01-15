@@ -26,16 +26,16 @@ public class ProdukController {
         return produkRepository.findById(id).get();
     }
 
-    @PostMapping(path = "/db")
-    public Map<String, Object> save(@RequestBody Produk distributor) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("msg", "Data berhasil disimpan");
-        try {
-            produkRepository.save(distributor);
-        } catch (Exception e) {
-            map.put("msg", "Data gagal disimpan");
-        }
-        return map;
-    }
+//    @PostMapping(path = "/db")
+//    public Map<String, Object> save(@RequestBody Produk produk) {
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("msg", "Data berhasil disimpan");
+//        try {
+//            produkRepository.save(produk);
+//        } catch (Exception e) {
+//            map.put("msg", "Data gagal disimpan");
+//        }
+//        return map;
+//    }
 
 }
