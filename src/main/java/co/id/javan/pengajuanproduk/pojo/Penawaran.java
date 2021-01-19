@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -32,8 +33,9 @@ public class Penawaran extends TaskVariable {
     private String noTelpPenawaran;
     @Column(columnDefinition = "varchar(20)")
     private String statusPenawaran;
-    @Column(columnDefinition = "date")
-    private String tglPengajuan;
+    @Column(columnDefinition = "timestamp")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date tglPengajuan;
 
     @Column(columnDefinition = "varchar(50)")
     protected String instanceId;
