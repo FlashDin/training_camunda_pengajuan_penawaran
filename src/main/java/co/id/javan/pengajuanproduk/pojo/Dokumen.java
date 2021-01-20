@@ -18,6 +18,8 @@ public class Dokumen extends TaskVariable {
     private long idDokumen;
     @Column(columnDefinition = "varchar(50)")
     private String pathDokumen;
+    @Column(columnDefinition = "varchar(50)")
+    private String jenisDokumen;
     @JsonIgnore
     @ManyToOne(targetEntity = Penawaran.class)
     @JoinColumn(name = "id_penawaran", referencedColumnName = "idPenawaran")
