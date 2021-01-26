@@ -24,7 +24,7 @@ public class UpdateDataDokumenService implements JavaDelegate {
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
         System.out.println("Update Dokumen");
-        List<LinkedHashMap<String, Object>> ls = (List<LinkedHashMap<String, Object>>) delegateExecution.getVariable("produks");
+        List<LinkedHashMap<String, Object>> ls = (List<LinkedHashMap<String, Object>>) delegateExecution.getVariable("dokumens");
         List<Dokumen> dokumens = modelMapper.map(ls, new TypeToken<List<Dokumen>>() {
         }.getType());
         dokumens.forEach(dokumen -> dokumen.setInstanceId(delegateExecution.getProcessInstanceId()));
