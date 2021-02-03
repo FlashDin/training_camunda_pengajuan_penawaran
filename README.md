@@ -194,3 +194,6 @@ statusPenawaran=['Persiapan', 'Menunggu Persetujuan', 'Penawaran Diterima', 'Pen
 #### ambil data dari table generate: `produk`
 - http://localhost:8090/api/task/produk/db/all
 - http://localhost:8090/api/task/produk/db/{id}
+
+#### Front-End
+- https://gitlab.com/my-public1/pengajuan-penawaran-fe
